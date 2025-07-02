@@ -90,7 +90,16 @@
             position: relative;
             z-index: 10;
         }
-        
+                /* Añade esto en la sección de estilos */
+        .text-area-centered {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            z-index: 1000;
+        }
         header {
             text-align: center;
             margin-bottom: 30px;
@@ -502,10 +511,14 @@
         document.getElementById('continue-btn').addEventListener('click', function() {
             returnToMain();
         });
-        
+                
         // Botón de confesión (funciona igual que antes)
         document.getElementById('confess-btn').addEventListener('click', function() {
             const dedication = dedications.confession;
+            
+            // Centrar el área de texto
+            const textArea = document.querySelector('.text-area');
+            textArea.classList.add('text-area-centered');
             
             document.querySelector('.dedication-title').textContent = dedication.title;
             document.querySelector('.dedication-text').textContent = dedication.text;
@@ -523,8 +536,14 @@
             
             // Confeti
             createConfetti();
+            
+            // Desplazamiento suave al centro
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
-        
+                
         // Botón de respuesta
         document.getElementById('response-btn').addEventListener('click', function() {
             // Ocultar el contenedor de pregunta
