@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Jessica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #5e2a47;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        /* Fondos animados */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .hearts, .sparks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .heart, .spark {
+            position: absolute;
+            opacity: 0.6;
+            animation: float 15s infinite linear;
+        }
+        
+        .heart {
+            color: #ff4d6d;
+            font-size: 24px;
+        }
+        
+        .spark {
+            color: #ffd166;
+            font-size: 18px;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Contenido principal */
+        .container {
+            max-width: 800px;
+            width: 90%;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px dashed #ffafbd;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            color: #c9184a;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7d4f50;
+            margin-bottom: 20px;
+        }
+        
+        /* Menú de dedicatorias */
+        .dedications-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .dedication-option {
+            background: linear-gradient(135deg, #ffcad4, #ffb3c6);
+            border: none;
+            border-radius: 15px;
+            padding: 15px;
+            font-size: 1rem;
+            font-family: 'Playfair Display', serif;
+            color: #5e2a47;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dedication-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, #ffb3c6, #ff8fab);
+        }
+        
+        .dedication-option:active {
+            transform: translateY(0);
+        }
+        
+        .dedication-option::after {
+            content: "❤";
+            position: absolute;
+            top: -10px;
+            right: 5px;
+            opacity: 0.3;
+            font-size: 20px;
+        }
+        
+        /* Área de texto */
+        .text-area {
+            margin: 30px 0;
+            padding: 25px;
+            background: #fff9fb;
+            border-radius: 15px;
+            border: 1px solid #ffccd5;
+            min-height: 200px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dedication-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            font-family: 'Dancing Script', cursive;
+            color: #5e2a47;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .dedication-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #c9184a;
+            font-size: 1.5rem;
+        }
+        
+        /* Botón especial */
+        .special-button {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #c9184a, #a4133c);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(201, 24, 74, 0.4);
+        }
+        
+        .special-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(201, 24, 74, 0.6);
+        }
+        
+        .special-button:active {
+            transform: scale(0.98);
+        }
+        
+        /* Botón de respuesta */
+        .response-button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #ff4d6d, #c9184a);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-family: 'Dancing Script', cursive;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(201, 24, 74, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        .response-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(201, 24, 74, 0.6);
+            background: linear-gradient(135deg, #ff758f, #ff4d6d);
+        }
+        
+        /* Mensaje final */
+        .final-message {
+            text-align: center;
+            font-size: 2.5rem;
+            font-family: 'Dancing Script', cursive;
+            color: #c9184a;
+            font-weight: bold;
+            margin: 20px 0;
+            animation: heartbeat 1.2s infinite;
+        }
+        
+        .whatsapp-button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+        }
+        
+        .whatsapp-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+        
+        /* Botón de continuar */
+        .continue-button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #ff8fab, #ff758f);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 143, 171, 0.4);
+        }
+        
+        .continue-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 143, 171, 0.6);
+            background: linear-gradient(135deg, #ff758f, #ff8fab);
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Estilos para pantalla completa de mensaje */
+        .full-message-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            padding: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .full-message-content {
+            max-width: 600px;
+            width: 90%;
+            background: #fff9fb;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ffccd5;
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .dedications-menu {
+                grid-template-columns: 1fr;
+            }
+            
+            .final-message {
+                font-size: 2rem;
+            }
+            
+            .response-button, .whatsapp-button {
+                font-size: 1.3rem;
+                padding: 12px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="hearts"></div>
+        <div class="sparks"></div>
+    </div>
+    
+    <!-- Contenedor principal -->
+    <div class="container" id="main-container">
+        <header>
+            <h1>Para Jessi</h1>
+            <p class="subtitle">Mi princesa de ojos marrones</p>
+        </header>
+        
+        <div class="dedications-menu">
+            <button class="dedication-option" data-dedication="1">Primer encuentro</button>
+            <button class="dedication-option" data-dedication="2">Tu sonrisa</button>
+            <button class="dedication-option" data-dedication="3">Tiempo juntos</button>
+            
+            <button class="dedication-option" data-dedication="5">Eres única</button>
+            <button class="dedication-option" data-dedication="6">Futuro juntos</button>
+        </div>
+        
+        <button class="special-button" id="confess-btn">¡Quiero decirte algo importante!</button>
+        
+        <div class="text-area">
+            <div class="dedication-title">Dedicado con Amor</div>
+            <div class="dedication-text">Aquí aparecerá el mensaje especial...</div>
+            
+            <div id="question-container" style="display: none; text-align: center;">
+                <div id="final-message" class="final-message" style="display: none; margin-bottom: 20px;">¿Quieres ser mi novia?</div>
+                <button class="response-button" id="response-btn">¡Toca para responder!</button>
+            </div>
+            
+            <div id="whatsapp-container" style="display: none; text-align: center;">
+                <a id="whatsapp-btn" class="whatsapp-button" href="#" target="_blank">Enviar respuesta por WhatsApp</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contenedor para mensaje en pantalla completa -->
+    <div class="full-message-container" id="full-message">
+        <div class="full-message-content">
+            <div class="dedication-title" id="full-message-title"></div>
+            <div class="dedication-text" id="full-message-text"></div>
+            <button class="continue-button" id="continue-btn">Continuar</button>
+        </div>
+    </div>
+    
+    <footer>
+        Hecho con ❤️ para Jessica 
+    </footer>
+
+    <script>
+        // Crear corazones y estrellas de fondo
+        function createBackgroundElements() {
+            const heartsContainer = document.querySelector('.hearts');
+            const sparksContainer = document.querySelector('.sparks');
+            
+            // Crear corazones
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDuration = `${15 + Math.random() * 20}s`;
+                heart.style.animationDelay = `${Math.random() * 5}s`;
+                heartsContainer.appendChild(heart);
+            }
+            
+            // Crear estrellas
+            for (let i = 0; i < 20; i++) {
+                const spark = document.createElement('div');
+                spark.classList.add('spark');
+                spark.innerHTML = '✦';
+                spark.style.left = `${Math.random() * 100}%`;
+                spark.style.animationDuration = `${10 + Math.random() * 15}s`;
+                spark.style.animationDelay = `${Math.random() * 5}s`;
+                sparksContainer.appendChild(spark);
+            }
+        }
+        
+        // Dedicatorias
+        const dedications = {
+            1: {
+                title: "El día que te vi",
+                text: "Recuerdo perfectamente la primera vez que me enamore de ti. Al principio pensaba q solo me gustabas pero no paso mucho para darme cuenta q era algo mas profundo y algo en mi supo que eras especial. Desde ese momento, no he podido dejar de pensar en ti y en la magia que traes a mi vida."
+            },
+            2: {
+                title: "Tu sonrisa",
+                text: "Tu sonrisa es como un rayo de sol en un día nublado. Cada vez que la veo, mi corazón da un vuelco y todo a mi alrededor parece iluminarse. Me encantaría ser la razón de esa sonrisa."
+            },
+            3: {
+                title: "Nuestros momentos",
+                text: "Los momentos que paso a tu lado son los más preciados para mí. Cada risa, cada conversación, cada silencio compartido... todo se convierte en un recuerdo que guardo con cariño. Ojalá pudiéramos crear todos los dias nuevos bellos recuerdos."
+            },
+            
+            5: {
+                title: "Eres única",
+                text: "En este mundo lleno de personas, tú brillas con luz propia. Tu esencia, tu forma de ser, todo en ti es extraordinario. Nunca había conocido a alguien como tú, y probablemente nunca lo volveré a hacer."
+            },
+            6: {
+                title: "Nuestro futuro",
+                text: "Cuando pienso en el futuro, me gusta imaginarme a tu lado. Sueño con compartir risas, aventuras, sueños y hasta los momentos tranquilos contigo. Quisiera tener el privilegio de ser parte de tu vida. "
+            },
+            confession: {
+                title: "Lo que realmente siento",
+                text: "Jessica, llevo mucho tiempo enamorado profundamente de ti... Cada día siento que ese amor crece de manera monstruosa e insaciable. No sé si lo expreso de la mejor manera, pero te prometo que con cada momento que pasamos juntos intento demostrarte cuánto te quiero. Sé que todo esto ha sido cursi, pero fue la manera más creativa que encontré para hacerlo... Entonces quisiera preguntarte:"
+            }
+        };
+        
+        // Mostrar dedicatoria en pantalla completa
+        function showFullMessage(title, text) {
+            document.getElementById('full-message-title').textContent = title;
+            document.getElementById('full-message-text').textContent = text;
+            document.getElementById('full-message').style.display = 'flex';
+            document.getElementById('main-container').style.display = 'none';
+            
+            // Crear corazones flotantes
+            createFloatingHearts(10);
+        }
+        
+        // Volver al menú principal
+        function returnToMain() {
+            document.getElementById('full-message').style.display = 'none';
+            document.getElementById('main-container').style.display = 'block';
+        }
+        
+        // Mostrar dedicatoria seleccionada (ahora en pantalla completa)
+        document.querySelectorAll('.dedication-option').forEach(button => {
+            button.addEventListener('click', function() {
+                const dedicationId = this.getAttribute('data-dedication');
+                const dedication = dedications[dedicationId];
+                
+                showFullMessage(dedication.title, dedication.text);
+                
+                // Efecto visual
+                this.style.transform = "scale(0.95)";
+                setTimeout(() => {
+                    this.style.transform = "";
+                }, 200);
+            });
+        });
+        
+        // Botón de continuar
+        document.getElementById('continue-btn').addEventListener('click', function() {
+            returnToMain();
+        });
+        
+        // Botón de confesión (funciona igual que antes)
+        document.getElementById('confess-btn').addEventListener('click', function() {
+            const dedication = dedications.confession;
+            
+            document.querySelector('.dedication-title').textContent = dedication.title;
+            document.querySelector('.dedication-text').textContent = dedication.text;
+            
+            // Mostrar la pregunta y el botón de respuesta
+            document.getElementById('question-container').style.display = 'block';
+            document.getElementById('final-message').style.display = 'block';
+            
+            // Efecto especial
+            this.textContent = "¡Espero tu respuesta! ❤";
+            this.style.background = "linear-gradient(135deg, #ff4d6d, #c9184a)";
+            
+            // Crear muchos corazones
+            createFloatingHearts(20);
+            
+            // Confeti
+            createConfetti();
+        });
+        
+        // Botón de respuesta
+        document.getElementById('response-btn').addEventListener('click', function() {
+            // Ocultar el contenedor de pregunta
+            document.getElementById('question-container').style.display = 'none';
+            
+            // Mostrar el botón de WhatsApp
+            document.getElementById('whatsapp-container').style.display = 'block';
+            
+            // Configurar el enlace de WhatsApp
+            const phoneNumber = "+5359430625";
+            const message = encodeURIComponent("¡Sí quiero ser tu novia! ❤️");
+            const whatsappLink = `https://wa.me/${phoneNumber}?text=${message}`;
+            document.getElementById('whatsapp-btn').href = whatsappLink;
+            
+            // Crear un gran efecto visual
+            createFloatingHearts(30);
+            createConfetti();
+            
+            // Cambiar fondo a algo más romántico
+            document.body.style.background = "linear-gradient(135deg, #ff758f, #ff7eb3)";
+        });
+        
+        // Crear corazones flotantes
+        function createFloatingHearts(count) {
+            const container = document.querySelector('.text-area');
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.style.position = 'absolute';
+                heart.style.color = '#ff4d6d';
+                heart.style.fontSize = '24px';
+                heart.style.opacity = '0.8';
+                heart.style.zIndex = '5';
+                heart.style.left = `${10 + Math.random() * 80}%`;
+                heart.style.top = `${20 + Math.random() * 60}%`;
+                heart.style.animation = 'floatUp 3s forwards';
+                
+                container.appendChild(heart);
+                
+                // Eliminar después de la animación
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
+        }
+        
+        // Crear confeti
+        function createConfetti() {
+            const colors = ['#ff4d6d', '#ff8fab', '#ffb3c6', '#ffd166', '#c9184a'];
+            const container = document.body;
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.innerHTML = ['❤', '✦', '❁', '✿', '❣'][Math.floor(Math.random() * 5)];
+                confetti.style.position = 'fixed';
+                confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.fontSize = `${15 + Math.random() * 20}px`;
+                confetti.style.zIndex = '100';
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.top = '-30px';
+                confetti.style.opacity = '0.8';
+                confetti.style.animation = `confettiFall ${3 + Math.random() * 5}s linear forwards`;
+                
+                container.appendChild(confetti);
+                
+                // Eliminar después de la animación
+                setTimeout(() => {
+                    confetti.remove();
+                }, 8000);
+            }
+        }
+        
+        // Añadir estilos para animaciones
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes floatUp {
+                0% { transform: translateY(0) scale(1); opacity: 0.8; }
+                100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+            }
+            
+            @keyframes confettiFall {
+                0% { transform: translateY(0) rotate(0deg); }
+                100% { transform: translateY(100vh) rotate(${360 + Math.random() * 360}deg); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Inicializar
+        window.addEventListener('DOMContentLoaded', createBackgroundElements);
+    </script>
+</body>
+</html>
